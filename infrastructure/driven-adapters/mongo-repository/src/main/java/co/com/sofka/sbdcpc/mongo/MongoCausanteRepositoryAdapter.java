@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 import static co.com.sofka.sbdcpc.mongo.convertidor.Convertidor.*;
 
 @Repository
-public class MongoCausanteRepositoryAdapter extends AdapterOperations<Causante, CausanteData, String, MongoDBCausanteRepository> implements CausanteRepository{
+public class MongoCausanteRepositoryAdapter extends AdapterOperations<Causante, CausanteData, String, MongoDBCausanteRepository> implements CausanteRepository {
     public MongoCausanteRepositoryAdapter(MongoDBCausanteRepository repository, ObjectMapper mapper) {
         super(repository, mapper, d -> mapper.map(d, Causante.class));
     }
@@ -36,7 +36,7 @@ public class MongoCausanteRepositoryAdapter extends AdapterOperations<Causante, 
 
     @Override
     public Mono<Causante> guardarCausante(Causante causante) {
-        if(causante != null){
+        if (causante != null) {
             CausanteData nuevoCausanteData = convertirCausanteACausanteData(causante);
             return repository.save(nuevoCausanteData)
                     .map(Convertidor::convertirCausanteDataACausante);
@@ -54,26 +54,6 @@ public class MongoCausanteRepositoryAdapter extends AdapterOperations<Causante, 
     }
 
 
-//    @Override
-//    public Mono<Causante> actualizarCausante(Causante causante) {
-//        if (causante != null && causante.getId() != null) {
-//            String id = causante.getId();
-//            CausanteData causanteData = convertirCausanteACausanteData(causante);
-//            causanteData.setId(id);
-//            return repository.findById(id)
-//                    .flatMap(existingData -> {
-//                        if(!causanteData.getId().equals(existingData.getId())) {
-//                            return Mono.error(new ExcepcionesPersonalizadas(ExcepcionesPersonalizadas.Type.CAUSANTES_NO_ACTUALIZADO));
-//                        }
-//                        causanteData.setId(id);
-//                        return repository.save(causanteData)
-//                                .map(Convertidor::convertirCausanteDataACausante);
-//                    });
-//        } else {
-//            return Mono.error((new ExcepcionesPersonalizadas(ExcepcionesPersonalizadas.Type.CAUSANTE_NO_EXISTE)));
-//        }
-//    }
-
     @Override
     public Mono<Causante> actualizarCausante(Causante causante) {
         String id = causante.getId();
@@ -81,7 +61,7 @@ public class MongoCausanteRepositoryAdapter extends AdapterOperations<Causante, 
         causanteData.setId(id);
         return repository.findById(id)
                 .flatMap(existingData -> {
-                    if(!causanteData.getId().equals(existingData.getId())) {
+                    if (!causanteData.getId().equals(existingData.getId())) {
                         return Mono.error(new ExcepcionesPersonalizadas(ExcepcionesPersonalizadas.Type.CAUSANTES_NO_ACTUALIZADO));
                     }
                     causanteData.setId(id);
@@ -89,8 +69,6 @@ public class MongoCausanteRepositoryAdapter extends AdapterOperations<Causante, 
                             .map(Convertidor::convertirCausanteDataACausante);
                 });
     }
-
-
 
 
     @Override
@@ -104,5 +82,6 @@ public class MongoCausanteRepositoryAdapter extends AdapterOperations<Causante, 
         return repository.deleteById(id)
                 .then();
     }
+
 
 }

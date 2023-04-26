@@ -9,9 +9,9 @@ public class ObtenerMesadaUseCase {
 
         if (meses <= 36) {
             mesadaBeneficiario = salario * 0.5;
-        } else if (meses >= 37 && salario <= 60) {
+        } else if (meses <= 60) {
             mesadaBeneficiario = salario * 0.75;
-        } else if (salario <= 1500000) {
+        } else if (meses <= 120 && salario <= 1500000) {
             mesadaBeneficiario = salario * 0.75 + (meses * 2000);
         } else {
             mesadaBeneficiario = salario * 0.8 + (meses * 1000);

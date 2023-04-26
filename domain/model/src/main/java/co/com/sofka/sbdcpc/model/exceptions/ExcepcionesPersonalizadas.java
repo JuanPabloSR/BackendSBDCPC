@@ -6,6 +6,7 @@ public class ExcepcionesPersonalizadas extends ApplicationException {
 
     private static final long serialVersionUID = 1L;
 
+
     public enum Type {
 
         CAUSANTE_NO_EXISTE("El causante o su iD no existe"),

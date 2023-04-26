@@ -14,6 +14,4 @@ public class GuardarCausanteUseCase {
                 .flatMap(error -> Mono.error(new ExcepcionesPersonalizadas(ExcepcionesPersonalizadas.Type.CAUSANTE_YA_EXISTE)))
                 .switchIfEmpty(causanteRepository.guardarCausante(causante)).thenReturn(causante);
     }
-
-
 }

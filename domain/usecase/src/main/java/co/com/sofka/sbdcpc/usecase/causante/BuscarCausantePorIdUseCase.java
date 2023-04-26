@@ -11,5 +11,4 @@ public class BuscarCausantePorIdUseCase {
     public Mono<Causante> buscarCausantePorId(String id){
         return causanteRepository.buscarCausantePorId(id);
     }
-
 }
